@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+    <div id="content">
+      {% block content %}
+
+      {% endblock %}
+    </div>
+    <div id="sidebar">
+      <h2>My blog</h2>
+      <p>This is my blog.</p>I've posted{{ count }} anouncements so far.
+      <h3>Latest anouncement</h3>
+       <ul>
+        {% for item in announcementlist %}
+          <li> {{item.user.username}} {{item.title}}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>
