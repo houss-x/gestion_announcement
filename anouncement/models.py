@@ -18,6 +18,7 @@ class AnnouncementStatus(models.IntegerChoices):
 class Announcement(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
+    image=models.ImageField(default="https://media.istockphoto.com/id/1344512181/vector/icon-red-loudspeaker.jpg?s=612x612&w=0&k=20&c=MSi3Z2La8OYjSY-pr0bB6f33NOuUKAQ_LBUooLhLQsk=")
     category = models.ForeignKey(Category, on_delete=models.CASCADE,related_name='announcements')
     user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='announcements')
     status = models.IntegerField(
@@ -35,13 +36,12 @@ class Announcement(models.Model):
     objects=models.Manager
     published=PublishedAnouncementManager()
 
-    
-    
     def get_absolute_url(self):
         return reverse(
-            "anouncement:anouncement_detail",
-            args=[self.slug],
+            "anouncement:anouncement_detail",  # Use the correct namespace
+            args=[str(self.slug)],
         )
+    
     
     def __str__(self):
         return self.title

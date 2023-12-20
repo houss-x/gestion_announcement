@@ -8,8 +8,8 @@ from .models import Announcement
 
 def announcement_list(request):
     announcement_list = Announcement.published.all()
+    return render(request, "anouncement/list.html", {"announcementlist": announcement_list,"count":announcement_list.count()})
 
-    return render(request, "anouncement/detail.html", {"announcementlist": announcement_list,"count":announcement_list.count()})
-
-def get_announcement(request,id):
-    get_object_or_404()
+def get_announcement(request, slug, id):
+      anouncement =get_object_or_404(Announcement,id,slug=slug,id=id)
+      return render(request,"anouncement/detail.html",{"item":anouncement})
