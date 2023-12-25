@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from django.conf import settings
+
+from django.urls import URLPattern
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -52,7 +55,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'gestion_announcement.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -120,6 +122,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "authentication/static",
+    BASE_DIR / "anouncement/static"
 ]
 
 # Default primary key field type

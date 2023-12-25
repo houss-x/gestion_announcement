@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/card.css' %}">
+    <!-- Include the Font Awesome library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+    <div id="sidebar">
+        {% include 'anouncement/includes/sidebar.html' %}
+      </div>
+      <div id="content">
+        {% block content %}
+        <ul class="announcement-container">
+            {% for item in myanouncement %}
+                <li class="announcement-card">
+                    <h3>{{ item.title }}</h3>   
+                    <p>Category : {{ item.category.title }}</p>               
+                    <p>Content : {{ item.content }}</p>
+                    <a href="{% url 'announcement:edit_anouncement' pk=item.id %}">Edit</a>
+                    <form action="{% url 'announcement:delete_announcement' item.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        {% endblock %}
+    </div>
+    
+    
+  </body>
+</html>

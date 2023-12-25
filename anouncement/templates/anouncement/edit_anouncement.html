@@ -1,0 +1,24 @@
+{% load static %}
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/editcss.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>
+      {% block title %}
+      <h2>Edit Announcement</h2>
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+    {% block content %}
+    <h2>Edit anouncement</h2>
+    <br>
+    <form style="width: 50%; margin: auto;" method="post" enctype="multipart/form-data" action="{% url 'announcement:edit_anouncement' announcement.id %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="submit-button">Save changes</button>
+      <a href="{% url 'announcement:my_anouncement' %}" class="cancel-link">Cancel</a>
+    </form>
+  {% endblock %}
+  
+  </body>

@@ -1,0 +1,57 @@
+ /* Add custom styles for the announcement cards */
+ .announcement-card {
+    border: 2px solid #573ba8;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    margin-right: 20px; /* Adjust the margin between cards as needed */
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Adjust the width as needed */
+    float: left;
+  }
+  body {
+    background-color: #f2f2f2; /* Cool grey background color */
+    font-family: 'Arial', sans-serif; /* Set a default font-family for the entire page */
+}
+  .announcement-card img {
+    width: 30%; /* Set the image width to fill the container */
+    max-width: 30%; /* Ensure the image doesn't exceed its natural size */
+    height: auto;
+  }
+  
+  .announcement-card-content {
+    padding: 3px;
+    margin:2%;
+  }
+  
+  /* Clearfix to handle float elements inside the container */
+  .clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  #cration {
+    margin: 10px; /* Adjust the margin-top as needed */
+}
+.content-textarea {
+    border: 2px solid #746897;
+    border-radius: 5px;
+    width: 100%; /* Make the textarea fill the container width */
+    max-height: 100px; /* Set the maximum height */
+    overflow-y: auto; /* Add a vertical scrollbar if needed */
+    resize: none; /* Allow vertical resizing */
+    margin-top: 10px; /* Adjust the margin-top as needed */
+}
+.announcement-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+/* styles.css or in a <style> tag within your HTML file */
+.announcement-form {
+    /* Add styles for the form container */
+    width: 50%;
+    margin: auto;
+}

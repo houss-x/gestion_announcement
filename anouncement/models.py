@@ -8,7 +8,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
-
 class AnnouncementStatus(models.IntegerChoices):
     PENDING = 0, 'Pending'
     APPROVED = 1, 'Approved'
@@ -33,9 +32,9 @@ class Announcement(models.Model):
         def get_queryset(self):
             return super().get_queryset().filter(status=AnnouncementStatus.PUBLISHED)
         
-    objects=models.Manager
+    objects=models.Manager()
     published=PublishedAnouncementManager()
-
+    
     def get_absolute_url(self):
         return reverse(
             "anouncement:anouncement_detail",  # Use the correct namespace

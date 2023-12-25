@@ -1,32 +1,41 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/card.css' %}">
+    <!-- Include the Font Awesome library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>
       {% block title %}
       {% endblock %}
     </title>
   </head>
   <body>
+    <div id="sidebar">
+      {% include 'anouncement/includes/sidebar.html' %}
+    </div>
     <div id="content">
       {% block content %}
-
+      <h2>Welcome, {{ userName }}!</h2>
+        <h3>All announcement</h3>
+        <div class="clearfix">
+          {% for item in announcementlist %}
+            <div class="announcement-card">
+              <h3 id="cration">
+                Announced by {{ item.user.username }} <br>
+                <i class="far fa-clock"></i> {{ item.created_at|date:"F j, Y H:i" }}         
+            </h3>
+            <img src="{% static 'images/' %}{{ item.image }}" alt="{{ item.title }}">
+            <div class="announcement-card-content">
+                <h3>{{ item.title }}</h3>
+                <h4>Category : {{ item.category.title }}</h4>
+                <p class="content-textarea">{{ item.content }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
       {% endblock %}
-    </div>
-    <div id="sidebar">
-      <h2>My blog</h2>
-      <p>This is my blog.</p>I've posted{{ count }} anouncements so far.
-      <h3>Latest anouncement</h3>
-       <ul>
-        {% for item in announcementlist %}
-          <li> {{item.user.username}} {{item.title}} {{item.}}</p>
-          </li>
-          <li>
-            <img src="{{ item.image }}" alt="{{ item.title }}">
-          </li>
-          <li>
-          </li>
-        {% endfor %}
-      </ul>
     </div>
   </body>
 </html>

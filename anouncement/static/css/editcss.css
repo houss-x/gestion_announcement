@@ -1,0 +1,52 @@
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+select {
+    border: 2px solid #3d08de;
+    border-radius: 15px;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #f2f2f2; /* Cool grey background color */
+    font-family: 'Arial', sans-serif; /* Set a default font-family for the entire page */
+}
+/* Style for text inputs */
+input[type="text"], input[type="file"],input[type="select"] + label{
+    border: 2px solid #4b1cd7;
+    border-radius: 15px;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+/* Style for buttons */
+.submit-button {
+    border: 2px solid #573ba8;
+    border-radius: 15px;
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    padding: 10px 15px; /* Padding inside the button */
+    margin: 8px 0; /* Margin around the button */
+    cursor: pointer; /* Add a pointer cursor on hover */
+}
+
+.submit-button:hover {
+    background-color: #45a049; /* Darker green color on hover */
+}
+
+/* Style for cancel link */
+.cancel-link {
+    border: 2px solid #573ba8;
+    border-radius: 15px;
+    background-color: #cf1b1b; /* Green background color */
+    color: white; /* White text color */
+    padding: 10px 15px; /* Padding inside the button */
+    margin: 8px 0; /* Margin around the button */
+    cursor: pointer; /* Add a pointer cursor on hover */
+}

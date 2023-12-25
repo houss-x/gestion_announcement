@@ -1,0 +1,32 @@
+{% load static %}
+  <div class="area"></div>
+  <nav class="main-menu">
+    <ul>
+        <li class="has-subnav">
+            <a href="{% url 'anouncement:anouncement_list' %}">
+                <i class="fa fa-bullhorn fa-2x"></i>
+                <span class="nav-text">All Announcements</span>
+            </a>
+        </li>
+        <li class="has-subnav">
+            <a href="{% url 'anouncement:my_anouncement' %}">
+                <i class="fa fa-user fa-2x"></i>
+                <span class="nav-text">My Announcements</span>
+            </a>
+        </li>
+      <li>
+        <a href="#">
+            <i class="fa fa-folder fa-2x"></i>
+            <span class="nav-text">Category</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="logout">
+        <li class="logout">
+            <a href="{% url 'login' %}">
+              <i class="fa fa-power-off fa-2x"></i>
+              <span class="nav-text">Logout</span>
+            </a>
+          </li>
+    </ul> 
+  </nav>
