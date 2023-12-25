@@ -1,0 +1,27 @@
+{% load static %}
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/editcss.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>
+      {% block title %}
+      <h2>Add Announcement</h2>
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+    <div id ="content">
+        {% block content %}
+        <button class="submit-button" onclick="history.back();"><i class="fas fa-arrow-left"></i> Back</button>
+        <h2>Add New Announcement</h2>
+        
+        <form method="post" enctype="multipart/form-data" action="{% url 'announcement:add_anouncement' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit Announcement</button>
+        </form>
+    {% endblock %}
+    </div>
+  </body>
+  </html>

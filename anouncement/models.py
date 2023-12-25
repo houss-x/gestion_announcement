@@ -9,10 +9,10 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 class AnnouncementStatus(models.IntegerChoices):
-    PENDING = 0, 'Pending'
-    APPROVED = 1, 'Approved'
+    PENDING = 1, 'Pending'
     REJECTED = 2, 'Rejected'
-    PUBLISHED = 3, 'Published'
+    PUBLISHED = 3, 'Published',
+    FINISHED=4,'Finished'
 
 class Announcement(models.Model):
     title = models.CharField(max_length=255)

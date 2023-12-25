@@ -4,7 +4,7 @@ from django.http import Http404
 
 from django.shortcuts import get_object_or_404
 
-from anouncement.forms import UpdateAnnouncementForm
+from anouncement.forms import UpdateAnnouncementForm,AddAnnouncementForm
 
 from .models import Announcement
 
@@ -46,7 +46,18 @@ def edit_announcement(request, pk):
         form = UpdateAnnouncementForm(instance=announcement)
 
     return render(request, 'anouncement/edit_anouncement.html', {'form': form, 'announcement': announcement})
+def add_announcement(request):
+    if request.method == 'POST':
+        form = AddAnnouncementForm(request.POST, request.FILES)
+        if form.is_valid():
+            announcement = form.save(commit=False)
+            announcement.user = request.user  
+            announcement.save()
+            return redirect('anouncement:my_anouncement')
+    else:
+        form = AddAnnouncementForm()
 
+    return render(request, 'anouncement/add.html', {'form': form})
 def get_announcement(request, slug, id):
       anouncement =get_object_or_404(Announcement,id,slug=slug,id=id)
       return render(request,"anouncement/list.html",{"item":anouncement})

@@ -1,7 +1,33 @@
-<h1>Login</h1>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-    <a href="{% url 'signup' %}">Dont have Account Create</a>
-</form>
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+        <link rel="stylesheet" href="{% static 'css/editcss.css' %}">
+    <style>
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+        }
+  
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+      </style>
+    </head>
+    <body>
+        <main class="form-signin">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+                <p class="mt-5 mb-3 text-muted">&copy; 2023–2024</p>
+                <a href="{% url 'signup' %}">Dont have Account Create</a>
+            </form>
+        </main>      
+    </body>
+</html>

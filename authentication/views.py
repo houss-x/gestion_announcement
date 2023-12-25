@@ -28,7 +28,8 @@ def user_login(request):
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
             if user:
-                login(request, user)    
+                login(request, user)  
+                request.session['user_id'] = user.id
                 return redirect('anouncement:anouncement_list')
     else:
         form = LoginForm()
@@ -36,5 +37,8 @@ def user_login(request):
 
 # logout page
 def user_logout(request):
+    if 'user_id' in request.session:
+        del request.session['user_id']
+    
     logout(request)
     return redirect('login')
