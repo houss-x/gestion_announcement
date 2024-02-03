@@ -1,12 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login, logout 
 from .forms import UserCreationForm, LoginForm
-
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Create your views here.
-# Home page
-def index(request):
-    return render(request, 'index.html')
 
 # signup page
 def user_signup(request):
@@ -14,10 +12,21 @@ def user_signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('authentication:login')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
+def user_list(request):
+    users = User.objects.exclude(is_superuser=True)
+
+
+    return render(request, 'admin.html', {'users': users})
+
+def toggle_user_status(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    user.is_active = not user.is_active
+    user.save()
+    return redirect('authentication:adminportail')
 
 # login page
 def user_login(request):
@@ -30,7 +39,12 @@ def user_login(request):
             if user:
                 login(request, user)  
                 request.session['user_id'] = user.id
-                return redirect('anouncement:anouncement_list')
+                if user.is_superuser:
+                    return redirect('authentication:adminportail')
+                else:
+                    return redirect('anouncement:anouncement_list')
+            else:
+                messages.error(request, 'Invalid username or password. Please try again.')
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form': form})

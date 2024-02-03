@@ -24,7 +24,7 @@ overflow:visible;
 }
 
 .main-menu {
-background:#6855d2;
+background:#ce2023;
 border-right:1px solid #100b0b;
 position:absolute;
 top:0;
@@ -54,7 +54,7 @@ position:relative;
 display:table;
 border-collapse:collapse;
 border-spacing:0;
-color:#999;
+color:#b40909;
  font-family: arial;
 font-size: 14px;
 text-decoration:none;
@@ -115,8 +115,8 @@ margin:0;
 padding:0;
 }
 .main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
-color:#7e68d6;
-background-color:#696fe5;
+color:#ffffff;
+background-color:#ce2023;
 }
 .area {
 float: left;

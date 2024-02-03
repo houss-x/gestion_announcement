@@ -17,7 +17,7 @@
     </ul>
     <ul>
       <li class="logout">
-        <a href="#">
+        <a href="{% url 'anouncement:edit_profil' %}">
             <i class="fa fa-user fa-2x"></i>
             <span class="nav-text">Profil</span>
         </a>
@@ -26,7 +26,7 @@
     </ul>
     <ul class="logout">
         <li class="logout">
-            <a href="{% url 'login' %}">
+            <a href="{% url 'authentication:login' %}">
               <i class="fa fa-power-off fa-2x"></i>
               <span class="nav-text">Logout</span>
             </a>

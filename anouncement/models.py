@@ -30,14 +30,14 @@ class Announcement(models.Model):
 
     class PublishedAnouncementManager(models.Manager):
         def get_queryset(self):
-            return super().get_queryset().filter(status=AnnouncementStatus.PUBLISHED)
+            return super().get_queryset().filter(status=AnnouncementStatus.PUBLISHED, user__is_active=1)
         
     objects=models.Manager()
     published=PublishedAnouncementManager()
     
     def get_absolute_url(self):
         return reverse(
-            "anouncement:anouncement_detail",  # Use the correct namespace
+            "anouncement:anouncement_detail",
             args=[str(self.slug)],
         )
     

@@ -1,23 +1,23 @@
 from django.shortcuts import redirect, render
-
-from django.http import Http404
-
 from django.shortcuts import get_object_or_404
-
 from anouncement.forms import UpdateAnnouncementForm,AddAnnouncementForm
+from .models import Announcement, AnnouncementStatus, Category
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
+from anouncement.forms import UserProfileForm, ChangePasswordForm
 
-from .models import Announcement
 
 def announcement_list(request):
+    categories=Category.objects.all()
+
     if request.user.is_authenticated:
         user_announcement_list = Announcement.published.all()
-        count = user_announcement_list.count()
         connected_username = request.user.username
     else:
         user_announcement_list = None
-        count = 0
 
-    return render( request,"anouncement/list.html", {"announcementlist": user_announcement_list,"userName":connected_username, "count": count}
+    return render( request,"anouncement/list.html", {"announcementlist": user_announcement_list,"categories":categories,"userName":connected_username}
     )
 def my_announcement(request):
     print(request.user)
@@ -61,3 +61,33 @@ def add_announcement(request):
 def get_announcement(request, slug, id):
       anouncement =get_object_or_404(Announcement,id,slug=slug,id=id)
       return render(request,"anouncement/list.html",{"item":anouncement})
+@login_required
+def edit_profile(request):
+    user_form = UserProfileForm(instance=request.user)
+    password_form = ChangePasswordForm()
+
+    if request.method == 'POST':
+        if 'update_user_info' in request.POST:
+            user_form = UserProfileForm(request.POST, instance=request.user)
+            if user_form.is_valid():
+                user_form.save()
+                messages.success(request, 'Profile updated successfully.')
+                return redirect('anouncement:edit_profil')
+
+        elif 'change_password' in request.POST:
+            password_form = ChangePasswordForm(request.POST)
+            if password_form.is_valid():
+                password1 = password_form.cleaned_data.get('password1')
+                password2 = password_form.cleaned_data.get('password2')
+                password_verif = password_form.cleaned_data.get('password_verif')
+
+                if password1 == password2 and request.user.check_password(password_verif):
+                    request.user.set_password(password1)
+                    request.user.save()
+                    update_session_auth_hash(request, request.user)  # Keep the user logged in
+                    messages.success(request, 'Password changed successfully.')
+                    return redirect('anouncement:edit_profil')
+                else:
+                    messages.error(request, 'Passwords do not match or current password is incorrect.')
+
+    return render(request, 'anouncement/profil.html', {'user_form': user_form, 'password_form': password_form})

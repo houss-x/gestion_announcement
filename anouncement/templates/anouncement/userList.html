@@ -2,9 +2,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load bootstrap_icons %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/card.css' %}">
     <!-- Include the Font Awesome library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>
       {% block title %}
@@ -15,26 +20,55 @@
     <div id="sidebar">
         {% include 'anouncement/includes/sidebar.html' %}
       </div>
+   
       <div id="content">
+        <div class="btn-group">
+          <a href="{% url 'announcement:add_anouncement' %}" class="btn btn-primary"> New Announcement</a>
+        </div><br><br>
         {% block content %}
-        <ul class="announcement-container">
-            {% for item in myanouncement %}
-                <li class="announcement-card">
-                    <h3>{{ item.title }}</h3>   
-                    <p>Category : {{ item.category.title }}</p>               
-                    <p>Content : {{ item.content }}</p>
-                    <a href="{% url 'announcement:edit_anouncement' pk=item.id %}">Edit</a>
+
+        
+        <div class="row">
+          {% for item in myanouncement %}
+          <div class="col-md-4 mb-4">
+            <div class="announcement-card2">
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{% static 'images/' %}{{ item.image }}" alt="{{ item.title }}">
+                <div class="card-body">
+                  <h5 class="card-title">{{ item.title }}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Category : {{ item.category.title }}</li>
+                  <li class="list-group-item"><i class="bi bi-calendar-date"></i> {{ item.created_at|date:"F j, Y H:i" }}</li>
+                  <li class="list-group-item">
+                    <button type="button" class="btn btn-success"><a href="{% url 'announcement:edit_anouncement' pk=item.id %}">Edit</a></button>
+         
                     <form action="{% url 'announcement:delete_announcement' item.id %}" method="post" style="display: inline;">
                         {% csrf_token %}
-                        <button type="submit">Delete</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure to delete this anouncement ?');">Delete</button>
                     </form>
-                </li>
-            {% endfor %}
-        </ul>
-        <a href="{% url 'announcement:add_anouncement' %}" class="add-announcement-button">New Announcement</a>
+                  </li>
+                </ul>             
+              </div>
+            </div>     
+          </div>   
+          {% endfor %}
+        </div>       
         {% endblock %}
     </div>
     
     
   </body>
 </html>
+<script>
+  function confirmDelete(itemId) {
+      var confirmation = window.confirm("Are you sure you want to delete this announcement?");
+      if (confirmation) {
+          // If the user confirms, submit the form
+          document.getElementById('deleteForm' + itemId).submit();
+      } else {
+          // If the user cancels, do nothing
+          return false;
+      }
+  }
+</script>

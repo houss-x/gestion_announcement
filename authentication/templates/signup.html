@@ -1,7 +1,27 @@
+{% load static %}
+<html>
+<head>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  <title>Signup</title>
+  <style>
+    body {
+        padding: 40px;
+    }
+  </style>
+</head>
+<body>
+
 <h1>Signup</h1>
-<form method="POST">
+<br><br><br>
+<form method="POST" class="p-3">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Signup</button>
-    <a href="{% url 'login' %}">Already have account?</a>
+    <button type="submit" class="btn btn-primary">Signup</button>
+    <a href="{% url 'authentication:login' %}" class="btn btn-link">Already have an account?</a>
 </form>
+
+<script src="{% static 'path/to/your/custom/bootstrap.bundle.js' %}"></script>
+</body>
+</html>

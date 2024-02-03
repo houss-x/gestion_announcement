@@ -8,6 +8,6 @@ urlpatterns = [
     path("my", views.my_announcement, name='my_anouncement'),
     path('delete/<int:announcement_id>/', views.delete_announcement, name='delete_announcement'),
     path('edit/<int:pk>/', views.edit_announcement, name='edit_anouncement'),
-    path('new/', views.add_announcement, name='add_anouncement')
-
+    path('new/', views.add_announcement, name='add_anouncement'),
+    path('profil/', views.edit_profile, name='edit_profil')
 ] 
